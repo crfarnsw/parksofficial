@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ParksOfficialdbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ParksOfficialdbEntities" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ParksOfficialdbModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ParksOfficialdbModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <EntitySet Name="Events" EntityType="ParksOfficialdbModel.Event" />
+    <EntitySet Name="Facilities" EntityType="ParksOfficialdbModel.Facility" />
+    <EntitySet Name="ParkFacilities" EntityType="ParksOfficialdbModel.ParkFacility" />
+    <EntitySet Name="Parks" EntityType="ParksOfficialdbModel.Park" />
+    <EntitySet Name="ParkTypes" EntityType="ParksOfficialdbModel.ParkType" />
+    <EntitySet Name="sysdiagrams" EntityType="ParksOfficialdbModel.sysdiagram" />
+    <EntitySet Name="database_firewall_rules" EntityType="ParksOfficialdbModel.database_firewall_rules" />
+    <AssociationSet Name="FK_Events_Parks" Association="ParksOfficialdbModel.FK_Events_Parks">
+      <End Role="Park" EntitySet="Parks" />
+      <End Role="Event" EntitySet="Events" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ParkFacilities_Facilities" Association="ParksOfficialdbModel.FK_ParkFacilities_Facilities">
+      <End Role="Facility" EntitySet="Facilities" />
+      <End Role="ParkFacility" EntitySet="ParkFacilities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ParkFacilities_Parks" Association="ParksOfficialdbModel.FK_ParkFacilities_Parks">
+      <End Role="Park" EntitySet="Parks" />
+      <End Role="ParkFacility" EntitySet="ParkFacilities" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Parks_ParkTypes" Association="ParksOfficialdbModel.FK_Parks_ParkTypes">
+      <End Role="ParkType" EntitySet="ParkTypes" />
+      <End Role="Park" EntitySet="Parks" />
+    </AssociationSet>
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <EnumType Name="ParkTypeNames">
+    <Member Name="County" />
+    <Member Name="State" />
+    <Member Name="National" />
+  </EnumType>
+  <EnumType Name="ParkTypeName">
+    <Member Name="County" />
+    <Member Name="National" />
+    <Member Name="State" />
+  </EnumType>
+  <EnumType Name="ParkTypeEnum" a:ExternalTypeName="Enumerations.ParkTypeEnum" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+    <Member Name="County" Value="1" />
+    <Member Name="State" Value="2" />
+    <Member Name="National" Value="3" />
+  </EnumType>
+  <EnumType Name="ParkTypeNameEnum" a:ExternalTypeName="Enumeration.ParkTypeNameEnum" xmlns:a="http://schemas.microsoft.com/ado/2006/04/codegeneration">
+    <Member Name="County" />
+    <Member Name="State" />
+    <Member Name="National" />
+  </EnumType>
+  <EnumType Name="ParkTypeNameEnum2">
+    <Member Name="County" />
+    <Member Name="State" />
+    <Member Name="National" />
+  </EnumType>
+  <EntityType Name="Event">
+    <Key>
+      <PropertyRef Name="EventID" />
+    </Key>
+    <Property Name="EventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="EventDate" Type="DateTime" Precision="3" />
+    <Property Name="ParkID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Park" Relationship="ParksOfficialdbModel.FK_Events_Parks" FromRole="Event" ToRole="Park" />
+  </EntityType>
+  <EntityType Name="Facility">
+    <Key>
+      <PropertyRef Name="FacilityID" />
+    </Key>
+    <Property Name="FacilityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FacilityName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ParkFacilities" Relationship="ParksOfficialdbModel.FK_ParkFacilities_Facilities" FromRole="Facility" ToRole="ParkFacility" />
+  </EntityType>
+  <EntityType Name="ParkFacility">
+    <Key>
+      <PropertyRef Name="ParkFacilitiesID" />
+    </Key>
+    <Property Name="ParkFacilitiesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParkID" Type="Int32" />
+    <Property Name="FacilityID" Type="Int32" />
+    <NavigationProperty Name="Facility" Relationship="ParksOfficialdbModel.FK_ParkFacilities_Facilities" FromRole="ParkFacility" ToRole="Facility" />
+    <NavigationProperty Name="Park" Relationship="ParksOfficialdbModel.FK_ParkFacilities_Parks" FromRole="ParkFacility" ToRole="Park" />
+  </EntityType>
+  <EntityType Name="Park">
+    <Key>
+      <PropertyRef Name="ParkID" />
+    </Key>
+    <Property Name="ParkName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ParkAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ParkCity" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="ParkCounty" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+    <Property Name="ParkZipCode" Type="Int32" />
+    <Property Name="ParkFee" Type="Boolean" />
+    <Property Name="ParkHours" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DogFriendly" Type="Boolean" />
+    <Property Name="ParkPhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ParkTypeID" Type="Int32" />
+    <Property Name="ParkWebsite" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ParkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Events" Relationship="ParksOfficialdbModel.FK_Events_Parks" FromRole="Park" ToRole="Event" />
+    <NavigationProperty Name="ParkFacilities" Relationship="ParksOfficialdbModel.FK_ParkFacilities_Parks" FromRole="Park" ToRole="ParkFacility" />
+    <NavigationProperty Name="ParkType" Relationship="ParksOfficialdbModel.FK_Parks_ParkTypes" FromRole="Park" ToRole="ParkType" />
+  </EntityType>
+  <EntityType Name="ParkType">
+    <Key>
+      <PropertyRef Name="ParkTypeID" />
+    </Key>
+    <Property Name="ParkTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ParkTypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Parks" Relationship="ParksOfficialdbModel.FK_Parks_ParkTypes" FromRole="ParkType" ToRole="Park" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="database_firewall_rules">
+    <Key>
+      <PropertyRef Name="id" />
+      <PropertyRef Name="name" />
+      <PropertyRef Name="start_ip_address" />
+      <PropertyRef Name="end_ip_address" />
+      <PropertyRef Name="create_date" />
+      <PropertyRef Name="modify_date" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="start_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="end_ip_address" Type="String" Nullable="false" MaxLength="45" FixedLength="false" Unicode="false" />
+    <Property Name="create_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="modify_date" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="FK_Events_Parks">
+    <End Type="ParksOfficialdbModel.Park" Role="Park" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="ParksOfficialdbModel.Event" Role="Event" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Park">
+        <PropertyRef Name="ParkID" />
+      </Principal>
+      <Dependent Role="Event">
+        <PropertyRef Name="ParkID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ParkFacilities_Facilities">
+    <End Type="ParksOfficialdbModel.Facility" Role="Facility" Multiplicity="0..1" />
+    <End Type="ParksOfficialdbModel.ParkFacility" Role="ParkFacility" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Facility">
+        <PropertyRef Name="FacilityID" />
+      </Principal>
+      <Dependent Role="ParkFacility">
+        <PropertyRef Name="FacilityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ParkFacilities_Parks">
+    <End Type="ParksOfficialdbModel.Park" Role="Park" Multiplicity="0..1" />
+    <End Type="ParksOfficialdbModel.ParkFacility" Role="ParkFacility" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Park">
+        <PropertyRef Name="ParkID" />
+      </Principal>
+      <Dependent Role="ParkFacility">
+        <PropertyRef Name="ParkID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Parks_ParkTypes">
+    <End Type="ParksOfficialdbModel.ParkType" Role="ParkType" Multiplicity="0..1" />
+    <End Type="ParksOfficialdbModel.Park" Role="Park" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ParkType">
+        <PropertyRef Name="ParkTypeID" />
+      </Principal>
+      <Dependent Role="Park">
+        <PropertyRef Name="ParkTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

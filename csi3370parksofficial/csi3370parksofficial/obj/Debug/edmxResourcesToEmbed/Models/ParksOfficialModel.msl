@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ParksOfficialdbModelStoreContainer" CdmEntityContainer="ParksOfficialdbEntities">
+    <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ParksOfficialdbModel.Store.sp_alterdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ParksOfficialdbModel.Store.sp_creatediagram" />
+    <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ParksOfficialdbModel.Store.sp_dropdiagram" />
+    <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ParksOfficialdbModel.Store.sp_helpdiagramdefinition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ParksOfficialdbModel.sp_helpdiagramdefinition_Result">
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ParksOfficialdbModel.Store.sp_helpdiagrams">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="ParksOfficialdbModel.sp_helpdiagrams_Result">
+          <ScalarProperty Name="Database" ColumnName="Database" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Owner" ColumnName="Owner" />
+          <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ParksOfficialdbModel.Store.sp_renamediagram" />
+    <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ParksOfficialdbModel.Store.sp_upgraddiagrams" />
+    <EntitySetMapping Name="Events">
+      <EntityTypeMapping TypeName="ParksOfficialdbModel.Event">
+        <MappingFragment StoreEntitySet="Events">
+          <ScalarProperty Name="ParkID" ColumnName="ParkID" />
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="EventName" ColumnName="EventName" />
+          <ScalarProperty Name="EventID" ColumnName="EventID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facilities">
+      <EntityTypeMapping TypeName="ParksOfficialdbModel.Facility">
+        <MappingFragment StoreEntitySet="Facilities">
+          <ScalarProperty Name="FacilityName" ColumnName="FacilityName" />
+          <ScalarProperty Name="FacilityID" ColumnName="FacilityID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ParkFacilities">
+      <EntityTypeMapping TypeName="ParksOfficialdbModel.ParkFacility">
+        <MappingFragment StoreEntitySet="ParkFacilities">
+          <ScalarProperty Name="FacilityID" ColumnName="FacilityID" />
+          <ScalarProperty Name="ParkID" ColumnName="ParkID" />
+          <ScalarProperty Name="ParkFacilitiesID" ColumnName="ParkFacilitiesID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parks">
+      <EntityTypeMapping TypeName="ParksOfficialdbModel.Park">
+        <MappingFragment StoreEntitySet="Parks">
+          <ScalarProperty Name="ParkID" ColumnName="ParkID" />
+          <ScalarProperty Name="ParkWebsite" ColumnName="ParkWebsite" />
+          <ScalarProperty Name="ParkTypeID" ColumnName="ParkTypeID" />
+          <ScalarProperty Name="ParkPhoneNumber" ColumnName="ParkPhoneNumber" />
+          <ScalarProperty Name="DogFriendly" ColumnName="DogFriendly" />
+          <ScalarProperty Name="ParkHours" ColumnName="ParkHours" />
+          <ScalarProperty Name="ParkFee" ColumnName="ParkFee" />
+          <ScalarProperty Name="ParkZipCode" ColumnName="ParkZipCode" />
+          <ScalarProperty Name="ParkCounty" ColumnName="ParkCounty" />
+          <ScalarProperty Name="ParkCity" ColumnName="ParkCity" />
+          <ScalarProperty Name="ParkAddress" ColumnName="ParkAddress" />
+          <ScalarProperty Name="ParkName" ColumnName="ParkName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ParkTypes">
+      <EntityTypeMapping TypeName="ParksOfficialdbModel.ParkType">
+        <MappingFragment StoreEntitySet="ParkTypes">
+          <ScalarProperty Name="ParkTypeName" ColumnName="ParkTypeName" />
+          <ScalarProperty Name="ParkTypeID" ColumnName="ParkTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="ParksOfficialdbModel.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="definition" ColumnName="definition" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="database_firewall_rules">
+      <EntityTypeMapping TypeName="ParksOfficialdbModel.database_firewall_rules">
+        <MappingFragment StoreEntitySet="database_firewall_rules">
+          <ScalarProperty Name="modify_date" ColumnName="modify_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="end_ip_address" ColumnName="end_ip_address" />
+          <ScalarProperty Name="start_ip_address" ColumnName="start_ip_address" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

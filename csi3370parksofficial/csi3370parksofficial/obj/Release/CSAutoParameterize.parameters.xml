@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="ParksOfficialdbEntities-Web.config Connection String" description="ParksOfficialdbEntities Connection String used in web.config by the application to access the database." defaultValue="metadata=res://*/Models.ParksOfficialModel.csdl|res://*/Models.ParksOfficialModel.ssdl|res://*/Models.ParksOfficialModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=parksofficialserver.database.windows.net;initial catalog=ParksOfficialdb;persist security info=True;user id=dbadmin;password=Parksofficial1;multipleactiveresultsets=True;application name=EntityFramework&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\pink\\Source\\Workspaces\\ParksOfficial\\csi3370parksofficial\\csi3370parksofficial\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='ParksOfficialdbEntities']/@connectionString" />
+  </parameter>
+</parameters>
